@@ -6,7 +6,7 @@ public class MainHuffman {
         Data datos = new Data(CargarTexto.cargar());
         Solution sol = new Solution(datos);
         VorazHuffman vh = new VorazHuffman(sol);
-        System.out.println(vh.huffman().toString());
+        System.out.println(vh.codificar().toString());
 
     }
 }

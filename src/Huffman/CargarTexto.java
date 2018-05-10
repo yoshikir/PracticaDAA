@@ -10,19 +10,16 @@ public class CargarTexto {
     private static final String PATH = "src/Huffman/texto.txt";
 
     public static String cargar() {
-        int fila = 0;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(PATH));
             String cadena = "";
-            do {
-                cadena += br.readLine();
-
-                fila++;
-            } while (cadena != null && fila < 9 );
-
+            String texto = new String();
+            while ((cadena = br.readLine()) != null) {
+                texto += cadena;
+            }
             br.close();
-            return cadena;
+            return texto;
         } catch (FileNotFoundException fof) {
             return null;
         } catch (IOException ioe) {

@@ -18,7 +18,6 @@ public class Nodo implements Comparator<Nodo>{
         this.derecha = derecha;
     }
 
-    @Override
     public int compare(Nodo o1, Nodo o2){
         if(o1.frecuencia > o2.frecuencia){
             return -1;
@@ -29,12 +28,22 @@ public class Nodo implements Comparator<Nodo>{
         }
     }
 
-    public Nodo combinarNodos(Nodo a, Nodo b){
+    public int compareLetra(Nodo o1,Nodo o2){
+        if(o1.getLetra() > o2.getLetra()){
+            return 1;
+        }else if (o1.getLetra() < o2.getLetra()){
+            return -1;
+        }else {
+            return 0;
+        }
+    }
+
+    public Nodo combinarNodos(Nodo b){
         Nodo resultado = new Nodo();
         resultado.setDerecha(b.derecha);
-        resultado.setIzquierda(a.izquierda);
-        resultado.setLetra(a.letra);
-        resultado.setFrecuencia(a.frecuencia + b.frecuencia);
+        resultado.setIzquierda(this.izquierda);
+        resultado.setLetra(this.letra);
+        resultado.setFrecuencia(this.frecuencia + b.frecuencia);
         return resultado;
     }
 
@@ -69,4 +78,6 @@ public class Nodo implements Comparator<Nodo>{
     public void setDerecha(Nodo derecha) {
         this.derecha = derecha;
     }
+
+
 }

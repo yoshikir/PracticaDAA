@@ -8,46 +8,40 @@ public class Solution {
     //private LinkedList<Nodo> huffman;
     private PriorityQueue<Nodo> huffman;
     private HashMap<Character, String> huffmap;
+    private VorazHuffman vh;
 
     public Solution(Data datos) {
         this.datos = datos;
         //huffman = new LinkedList<>();
-        huffman = new PriorityQueue<>(datos.getDatos().length(), new Nodo());
+        ComparadorHuffman ch = new ComparadorHuffman();
+        huffman = new PriorityQueue<>(datos.getDatos().length(),ch);
 
-        for (char c : datos.getDatos().toCharArray()) {
-            Nodo nuevo = new Nodo();
-            nuevo.setFrecuencia(1);
-            nuevo.setLetra(c);
-            char letra;
-            for(Iterator<Nodo> it=huffman.iterator();it.hasNext();){
-                Nodo nodo = it.next();
-                letra = nodo.getLetra();
-                if(letra==c){
-                    nuevo.setFrecuencia(nodo.getFrecuencia()+1);
-                    huffman.remove(nodo);
-                    huffman.offer(nuevo);
-                    break;
+        for (int c='a';c<='z';c++) {
+            if(datos.getFrecuencias().containsKey(c)){
+                Nodo nuevo = new Nodo();
+                nuevo.setFrecuencia(datos.getFrecuencias().get(c));
+                Iterator<Character> it = datos.getFrecuencias().keySet().iterator();
+                while (it.hasNext()){
+                    Character entero = it.next();
+                    System.out.println("clave "+entero+" Valor "+datos.getFrecuencias().get(entero));
                 }
+                huffman.add(nuevo);
             }
-
-            huffman.add(nuevo);
-
         }
-
-
         while (huffman.size() > 1) {
             Nodo nodoA = huffman.poll();
             Nodo nodoB = huffman.poll();
             Nodo nodoAB = new Nodo();
 
-            nodoAB.setFrecuencia(nodoA.getFrecuencia() + nodoB.getFrecuencia());
             nodoAB.setIzquierda(nodoA);
             nodoAB.setDerecha(nodoB);
+            nodoAB.setFrecuencia(nodoA.getFrecuencia() + nodoB.getFrecuencia());
 
             huffman.offer(nodoAB);
         }
 
         this.huffmap = new HashMap<>();
+        this.vh = new VorazHuffman(this);
 
     }
 
@@ -62,5 +56,9 @@ public class Solution {
 
     public HashMap<Character, String> getHuffmap() {
         return huffmap;
+    }
+
+    public String getSolucion(){
+        return vh.codificar();
     }
 }

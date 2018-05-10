@@ -2,7 +2,7 @@ package Huffman;
 
 import java.util.Comparator;
 
-public class Nodo implements Comparator<Nodo>{
+public class Nodo{
 
     private char letra;
     private int frecuencia;
@@ -13,20 +13,20 @@ public class Nodo implements Comparator<Nodo>{
 
     }
 
-    public Nodo(char letra, Nodo izquierda, Nodo derecha) {
+    public Nodo (Nodo izquierda, Nodo derecha){
+        this.frecuencia = izquierda.frecuencia + derecha.frecuencia;
+        this.letra = izquierda.letra;
         this.izquierda = izquierda;
         this.derecha = derecha;
     }
 
-    public int compare(Nodo o1, Nodo o2){
-        if(o1.frecuencia > o2.frecuencia){
-            return -1;
-        }else if (o2.frecuencia > o1.frecuencia){
-            return 1;
-        }else {
-            return 0;
-        }
+    public Nodo(char letra, Nodo izquierda, Nodo derecha) {
+        this.frecuencia = izquierda.frecuencia + derecha.frecuencia;
+        this.letra = izquierda.letra;
+        this.izquierda = izquierda;
+        this.derecha = derecha;
     }
+
 
     public int compareLetra(Nodo o1,Nodo o2){
         if(o1.getLetra() > o2.getLetra()){

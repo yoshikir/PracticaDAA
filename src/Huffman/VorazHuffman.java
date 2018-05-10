@@ -13,29 +13,28 @@ public class VorazHuffman {
     }
 
     public String codificar() {
-        huffmanRec(sol.getHuffman().poll(), sol.getHuffmap(), new StringBuffer());
+        huffmanRec(sol.getHuffman().poll(), sol.getHuffmap(), new String());
         return sol.getHuffmap().toString();
     }
 
-    public void huffmanRec(Nodo nodo, HashMap<Character, String> mapa, StringBuffer codigo) {
+    public void huffmanRec(Nodo nodo, HashMap<Character, String> mapa, String codigo) {
 
         if (nodo == null)
             return;
-        if (nodo.getDerecha() == null && nodo.getIzquierda() == null) {
+
+        if (nodo.getDerecha() != null) {
+            huffmanRec(nodo.getDerecha(), mapa, codigo + 0);
+        } if (nodo.getIzquierda() != null) {
+            huffmanRec(nodo.getIzquierda(), mapa, codigo + 0);
+        } else {
             mapa.put(nodo.getLetra(), codigo.toString());
-            return;
         }
-
-        codigo.append("0");
-        huffmanRec(nodo.getIzquierda(), mapa, codigo);
-        codigo.deleteCharAt(codigo.length() - 1);
-
-        codigo.append("1");
-        huffmanRec(nodo.getDerecha(), mapa, codigo);
-        codigo.deleteCharAt(codigo.length() - 1);
-
-        //System.out.println(codigo);
 
     }
 
+
+    //System.out.println(codigo);
+
 }
+
+

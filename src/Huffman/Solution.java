@@ -14,20 +14,21 @@ public class Solution {
         this.datos = datos;
         //huffman = new LinkedList<>();
         ComparadorHuffman ch = new ComparadorHuffman();
-        huffman = new PriorityQueue<>(datos.getDatos().length(),ch);
+        huffman = new PriorityQueue<>(datos.getDatos().length(), ch);
 
-        for (int c='a';c<='z';c++) {
-            if(datos.getFrecuencias().containsKey(c)){
+        //Esto está bien por fin
+        Iterator<Character> it = datos.getFrecuencias().keySet().iterator();
+        while (it.hasNext()) {
+            for (int c = 0; c <= datos.getFrecuencias().size()-1; c++) {
+                Character entero = it.next();
                 Nodo nuevo = new Nodo();
-                nuevo.setFrecuencia(datos.getFrecuencias().get(c));
-                Iterator<Character> it = datos.getFrecuencias().keySet().iterator();
-                while (it.hasNext()){
-                    Character entero = it.next();
-                    System.out.println("clave "+entero+" Valor "+datos.getFrecuencias().get(entero));
-                }
+                nuevo.setFrecuencia(datos.getFrecuencias().get(entero));
+                nuevo.setLetra(entero);
                 huffman.add(nuevo);
             }
         }
+
+
         while (huffman.size() > 1) {
             Nodo nodoA = huffman.poll();
             Nodo nodoB = huffman.poll();
@@ -58,7 +59,7 @@ public class Solution {
         return huffmap;
     }
 
-    public String getSolucion(){
+    public String getSolucion() {
         return vh.codificar();
     }
 }

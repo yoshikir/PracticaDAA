@@ -5,38 +5,38 @@ public class Calendario {
     private int equipos;
     private int[][] tabla;
 
-    public Calendario(){
+    public Calendario(int equipos){
+        this.equipos = equipos;
         this.tabla = calendario();
+        System.out.println(equipos);
     }
 
     public int[][] calendario(){
-        int[][] tabla = null;
-        return formarTabla(tabla,1,equipos);
+        return formarTabla(tabla,0,this.equipos);
     }
 
-    private int[][] formarTabla (int[][]tabla, int minimo,int equipos){
+    private int[][] formarTabla (int[][]tabla, int inf,int sup){
         int medio = 0;
-        if(minimo==equipos-1){
-            tabla[minimo][1] = equipos;
-            tabla[equipos][1] = minimo;
-            return tabla;
+        if(inf==sup-1){
+            tabla[inf][1] = sup;
+            tabla[sup][1] = inf;
         }else {
-            medio = (minimo + equipos) / 2;
-            formarTabla(tabla,minimo,medio);
-            formarTabla(tabla,medio + 1,equipos);
-            completarTabla(tabla,minimo,medio,medio,equipos - 1,medio+1);
-            completarTabla(tabla,medio+1,equipos,medio,equipos-1,minimo);
+            medio = (inf + sup) / 2;
+            formarTabla(tabla,inf,medio);
+            formarTabla(tabla,medio + 1,sup);
+            completarTabla(tabla,inf,medio,sup - medio,sup - inf,medio+1);
+            completarTabla(tabla,medio+1,sup,medio,sup-1,inf);
         }
-        return null;
+        return tabla;
     }
 
     private int[][] completarTabla(int[][] tabla, int equipoInf, int equipoSup, int diaInf, int diaSup, int eqInicial){
-        for(int j=diaInf;j<=diaSup;j++){
+        for(int j=diaInf;j<= diaSup-1;j++){
             tabla[equipoInf][j] = eqInicial + j - diaInf;
         }
-        for(int i=equipoInf + 1; i<= equipoSup; i++){
+        for(int i=equipoInf + 1; i<= equipoSup-1; i++){
             tabla[i][diaInf] = tabla[i-1][diaSup];
-            for(int j=diaInf + 1;j<=diaSup;j++){
+            for(int j=diaInf + 1;j<diaSup-1;j++){
                 tabla[i][j] = tabla[i-1][j-1];
             }
         }
@@ -45,5 +45,9 @@ public class Calendario {
 
     public int getEquipos() {
         return equipos;
+    }
+
+    public void setEquipos(int equipos) {
+        this.equipos = equipos;
     }
 }

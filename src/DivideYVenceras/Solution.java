@@ -12,11 +12,7 @@ public class Solution {
     }
 
     public boolean esSimple(){
-        if(solucion.length == 2){
-            return true;
-        }else {
-            return false;
-        }
+        return solucion.length == 2;
     }
 
     public void printSolucion(){
@@ -36,18 +32,18 @@ public class Solution {
         return getSolucion().length;
     }
 
-    public Solution combinarSoluciones(Solution sol1,Solution sol2){
+    /*public Solution combinarSoluciones(Solution sol1,Solution sol2){
         int nuevoSize = sol1.getSolucion().length + sol2.getSolucion().length;
         this.solucion = new String[nuevoSize][nuevoSize];
         for(int i=0; i <= sol1.solucion.length; i++){
 
         }
-    }
+    }*/
 
-    public Solution[] dividirSolucion(){
+    /*public Solution[] dividirSolucion(){
         Solution[] soluciones;
         for(int i=0; i<=solucion.length;i++){
 
         }
-    }
+    }*/
 }

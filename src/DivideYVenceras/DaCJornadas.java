@@ -9,7 +9,7 @@ public class DaCJornadas {
         this.numeroJornadas = sol.getJornadas();
     }
 
-    public Solution divideYVenceras (Solution sol){
+    /*public Solution divideYVenceras (Solution sol){
         if(sol.esSimple()){
             solucionCorrecta = sol;
             return sol;
@@ -18,5 +18,5 @@ public class DaCJornadas {
                 divideYVenceras(sol);
             }
         }
-    }
+    }*/
 }
